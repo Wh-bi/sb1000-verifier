@@ -118,6 +118,8 @@ Free tier: 60 requests/minute per IP. The API is stateless — submitted content
 Full statutory breakdown, FAQ and the hosted verifier:
 **https://wanhetools.top/sb1000**
 
+Partnership or licensing enquiries: **https://wanhetools.top/partners** (contact form, no email needed)
+
 ---
 
 ## Legal
@@ -131,3 +133,16 @@ Full statutory breakdown, FAQ and the hosted verifier:
 The verifier and this specification are released under the MIT License. See `LICENSE`.
 
 *(The hosted service's rule sets for other jurisdictions are separate and not covered by this repository.)*
+
+## Scope of this licence
+
+This licence covers the reference verifier (`sb1000_verify.py`) and the field
+specification in this repository, which implement publicly available statutory
+requirements of California SB 1000 (Chapter 861, Statutes of 2026).
+
+It does not cover the hosted service's rule sets for other jurisdictions, which
+are separate works and are not distributed here.
+
+This project is an independent implementation. It is not affiliated with,
+endorsed by, or certified by the State of California, the California Attorney
+General, or any government agency. It does not provide legal advice.
