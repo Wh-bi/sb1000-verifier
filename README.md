@@ -150,3 +150,27 @@ General, or any government agency. It does not provide legal advice.
 ## Field-by-field reference
 
 [California SB 1000: the six latent-disclosure fields, in practice](SB1000-six-fields-reference.md) — what each of the six statutory fields means operationally, where it actually lives on disk (C2PA/JUMBF, XMP, IPTC), the fields-vs-truth distinction, and the traps that make verifiers report wrong answers.
+
+## Self-test and fixtures
+
+```
+python sb1000_verify.py --selftest                  # 4 assertions on synthetic blobs
+python sb1000_verify.py --make-fixtures fixtures    # write 7 test fixtures + README
+```
+
+The fixture generator writes structurally faithful samples (a real JPEG APP11
+segment, a link-based disclosure, a missing-version case, a PNG with no
+provenance, a truncated file) together with a README recording the expected
+verdict for each.
+
+**They are not cryptographically signed C2PA files.** Real C2PA signing needs a
+certificate and the official `c2pa` library; this tool is dependency-free by
+design, so it cannot produce signed assets. The fixtures exercise field
+detection and malformed-input behaviour, nothing about signature validity.
+
+The generator earned its place immediately: the `02-missing-version` fixture
+(`claim_generator=AdobeFirefly`, no version number) was reported as `complete`.
+The cause was that a bare model-name pattern satisfied the
+`system_name_version` field, even though the statute asks for the system name
+**and** its version. A pure model-name match is now reported as `weak` and no
+longer counts toward completeness.
