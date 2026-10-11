@@ -14,6 +14,10 @@ duty — and expressly permits a qualifying third-party tool to satisfy it.**
 
 ## Why this document exists
 
+**Where this lives in the code.** The California AI Transparency Act is codified in
+the **Business and Professions Code at § 22757.1 and following** — not in the Civil Code.
+It was enacted by SB 942 (2024) and amended by AB 853 (2025) and now SB 1000 (2026).
+
 California SB 1000 amends the California AI Transparency Act (SB 942 / AB 853). It was
 signed on **30 September 2026 and took effect immediately** — it is not a law with a
 future commencement date.
@@ -306,5 +310,5 @@ Hosted API if you would rather not run anything locally:
 
 *This document is a technical reference to a statutory field list. It is not legal advice
 and does not create an attorney–client relationship. Section numbering follows California
-Civil Code § 22757.3 as amended by SB 1000. Verify the current statutory text before
+Business and Professions Code § 22757.1 et seq. as amended by SB 1000. Verify the current statutory text before
 relying on it. Not affiliated with or endorsed by the State of California.*
