@@ -1,0 +1,7 @@
+﻿# backups and editor leftovers must never enter the repository
+*.bak
+*.bak_*
+*.orig
+*.tmp
+__pycache__/
+*.pyc
