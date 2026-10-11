@@ -1,4 +1,4 @@
-# SB 1000 Latent-Disclosure Field Verifier
+﻿# SB 1000 Latent-Disclosure Field Verifier
 
 **An open reference implementation for verifying the six latent-disclosure fields required by California SB 1000.**
 
@@ -146,3 +146,7 @@ are separate works and are not distributed here.
 This project is an independent implementation. It is not affiliated with,
 endorsed by, or certified by the State of California, the California Attorney
 General, or any government agency. It does not provide legal advice.
+
+## Field-by-field reference
+
+[California SB 1000: the six latent-disclosure fields, in practice](SB1000-six-fields-reference.md) — what each of the six statutory fields means operationally, where it actually lives on disk (C2PA/JUMBF, XMP, IPTC), the fields-vs-truth distinction, and the traps that make verifiers report wrong answers.
