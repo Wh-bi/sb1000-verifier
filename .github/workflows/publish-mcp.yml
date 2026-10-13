@@ -1,0 +1,54 @@
+name: Publish to MCP Registry
+
+# ★ 2026-10-13 新增：把我们的 MCP 服务器发布到官方 MCP 注册表
+#
+# 【为什么做这个】
+#   今天的硬结论：SkillHub / Edge 商店 / AgentPay / 网站 —— **四个平台都不给我们
+#   陌生人曝光**（Edge 上架 32 个扩展、4 个月、0 展示）。
+#   而 MCP 官方注册表是**索引型渠道**（有公开搜索 API），不靠推荐算法。
+#   我们的 MCP 端点 `https://mcp.wanhetools.top/mcp` 已实测可用
+#   （initialize 200 · 2 个工具：check_content / check_ai_label）。
+#   ⇒ 这可能是唯一"能让 AI 客户端发现我们"的渠道。
+#
+# 【认证方式：GitHub OIDC】
+#   官方推荐（不需要 PAT、不需要密钥、不需要人工授权）：
+#     permissions: id-token: write
+#     ./mcp-publisher login github-oidc
+#   命名空间必须匹配 GitHub 账号：io.github.Wh-bi/*
+#
+# 【触发方式】推 tag（如 v1.0.0）即自动发布
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch: {}      # 也支持手动触发
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write        # OIDC 必需
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show server.json
+        run: cat server.json
+
+      - name: Install mcp-publisher
+        run: |
+          set -euo pipefail
+          OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+          ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+          URL="https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_${OS}_${ARCH}.tar.gz"
+          echo "Downloading $URL"
+          curl -fsSL "$URL" | tar xz mcp-publisher
+          ./mcp-publisher --version || true
+
+      - name: Authenticate to MCP Registry (OIDC)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server to MCP Registry
+        run: ./mcp-publisher publish
